@@ -1,8 +1,23 @@
 .header {
-	background-color: #275977;
+	background-color: #1d4375;
+	padding: 25px;
+}
+
+.app {
+	background-color: #ededed;
+	padding: 25px;
+}
+
+.footer {
+	background-color: #1d4375;
 	padding: 25px;
 }
 
 .defaultFont {
+	color: white;
+	font-family: "Verdana";
+}
+
+.blackFont {
 	font-family: "Verdana";
 }
