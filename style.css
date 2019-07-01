@@ -19,6 +19,11 @@ body {
 	padding: 25px;
 }
 
+.content {
+	padding-left: 25vw;
+	padding-right: 25vw;
+}
+
 .defaultFont {
 	color: white;
 	font-family: "Verdana";
