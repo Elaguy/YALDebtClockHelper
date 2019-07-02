@@ -14,6 +14,8 @@
 		<!-- Header -->
 		<div class="header">
 			<div class="content">
+				<h3 id="widthLabel" class="defaultFont">Width = </h3>
+				
 				<h1 class="defaultFont">YALDebtClockHelper</h1>
 			
 				<h4 class="defaultFont">
@@ -50,5 +52,9 @@ Donec vitae ligula non orci dignissim viverra. Etiam tincidunt volutpat dolor vi
 			</div>
 		</div>
 	</body>
+	
+	<script>
+		document.getElementById("widthLabel").innerHTML += window.innerWidth;
+	</script>
 	
 </html>
