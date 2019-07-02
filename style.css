@@ -19,9 +19,12 @@ body {
 	padding: 25px;
 }
 
-.content {
-	padding-left: 25%;
-	padding-right: 25%;
+@media only screen and (min-width: 768px) {
+	/* For desktop */
+	.content {
+		padding-left: 25%;
+		padding-right: 25%;
+	}
 }
 
 .defaultFont {
