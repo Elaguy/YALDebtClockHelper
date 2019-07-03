@@ -33,16 +33,17 @@ body {
 }
 
 .defaultButton {
-	background-color: #ff8c00;
+	background-color: #fc6c0c;
 	border: none;
 	color: white;
+	outline: none;
 	padding: 12px 28px;
 	border-radius: 4px;
 	transition-duration: 0.4s;
 }
 
 .defaultButton:hover {
-	background-color: #efba5d;
+	background-color: #fc9653;
 	color: white;
 }
 
@@ -67,10 +68,14 @@ body {
 
 .blackFont {
 	font-family: "Verdana";
-	text-align: center;
 }
 
 .yellowFont {
 	color: yellow;
+	font-family: "Verdana";
+}
+
+.orangeFont {
+	color: #ff8c00;
 	font-family: "Verdana";
 }
