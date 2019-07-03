@@ -27,11 +27,50 @@ body {
 	}
 }
 
+.center {
+	text-align: center;
+	margin: auto;
+}
+
+.defaultButton {
+	background-color: #ff8c00;
+	border: none;
+	color: white;
+	padding: 12px 28px;
+	border-radius: 4px;
+	transition-duration: 0.4s;
+}
+
+.defaultButton:hover {
+	background-color: #efba5d;
+	color: white;
+}
+
+.defaultButton:active {
+	box-shadow: inset 0 0 10px gray;
+	transition-duration: 0s;
+}
+
 .defaultFont {
 	color: white;
 	font-family: "Verdana";
 }
 
+.redFont {
+	color: red;
+	font-family: "Verdana";
+}
+
 .blackFont {
+	font-family: "Verdana";
+}
+
+.blackFont {
+	font-family: "Verdana";
+	text-align: center;
+}
+
+.yellowFont {
+	color: yellow;
 	font-family: "Verdana";
 }
