@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+
+<html>
+	
+	<head>
+		<title>YALDebtClockHelper</title>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	
+	<body>
+	
+		<!-- Header -->
+		<div class="header">
+			<div class="content">
+				<h1 class="defaultFont">YALDebtClockHelper</h1>
+			
+				<h4 class="defaultFont">
+					Allows YAL activists to easily see the US National Debt for Visualize the Debt
+					events. 
+				
+					</br>
+					</br>
+
+					View the current US National Debt at a particular moment, and update it upon
+					request. This makes it easier for YAL activists to show
+					Visualize the Debt participants how fast the US National 
+					Debt is increasing.
+				</h4>
+			</div>
+		</div>
+		
+		<!-- Application -->
+		<div class="app">
+			<div class="content">
+				<div class="center">
+					<h3 class="blackFont">United States National Debt</h3>
+					<h2 class="redFont" id="debtValue"></h2>
+					<h4 class="orangeFont" id="diffValue"></h4>
+					<button class="defaultButton" onClick="app.run()">Update</button>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Footer -->
+		<div class="footer">
+			<div class="content">
+				<p class="defaultFont">
+					Contributions welcome.
+					<a class="defaultFont" href="https://github.com/Elaguy/YALDebtClockHelper"
+					target="_blank">[View on GitHub]</a>
+				</p>
+				
+				<p class="defaultFont">
+					Uses 
+					<a class="defaultFont" href="https://github.com/Elaguy/YALDebtClockHelper/
+					blob/master/LICENSE" target="_blank">Mozilla Public License 2.0</a>
+				</p>
+				
+				<p class="defaultFont">
+					Made for 
+					<a class ="defaultFont" href="https://en.wikipedia.org/wiki/Libertarianism"
+					target="_blank">Liberty</a> and <a class="defaultFont" href="https:/
+					/yaliberty.org/" target="_blank">YAL</a> by <a class="defaultFont"
+					href="https://github.com/Elaguy" target="_blank">Elaguy / Austin Schultz</a>
+				</p>
+			</div>
+		</div>
+
+		<script type="text/javascript" src="moment.js"></script>
+		<script type="text/javascript" src="moment-timezone-with-data.js"></script>
+		<script type="text/javascript" src="app.js"></script>
+	</body>
+	
+</html>
