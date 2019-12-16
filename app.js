@@ -1,6 +1,8 @@
 var App = function() {
     var app = this;
 
+    app.prevDebt = 0;
+    
     app.run = function() {
 	app.getRate();
     };
@@ -74,7 +76,15 @@ var App = function() {
 	var nowDebt = latestDebt + (secRate * diff);
 	console.log("nowDebt: " + nowDebt);
 
-	document.getElementById("debtValue").innerHTML = nowDebt.toLocaleString();
+	document.getElementById("debtValue").innerHTML = "$" + nowDebt.toLocaleString();
+
+	if(app.prevDebt > 0) {
+	    var prevDiff = nowDebt - app.prevDebt;
+
+	    document.getElementById("diffValue").innerHTML = "Difference from previous: $" + prevDiff.toLocaleString();
+	}
+	
+	app.prevDebt = nowDebt;
     };
     
     app.getStartDate = function(currentDate) {
