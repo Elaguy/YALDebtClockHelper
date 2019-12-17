@@ -46,16 +46,25 @@ var App = function() {
 	    var entriesLength = data["entries"].length;
 	    var latestDebt = data["entries"][0]["totalDebt"];
 	    var latestDebtDate = data["entries"][0]["effectiveDate"];
+	    var latestDebtDateParsed = app.parseDate(latestDebtDate);
+	    var latestDebtDateMoment = moment(latestDebtDateParsed, "MM-DD-YYYY");
 	    
 	    var initialDebt = data["entries"][entriesLength-1]["totalDebt"];
-	    
-	    var secRate = (latestDebt - initialDebt)/(entriesLength * 86400);
+	    var initialDebtDate = data["entries"][entriesLength-1]["effectiveDate"];
+	    var initialDebtDateParsed = app.parseDate(initialDebtDate);
+	    var initialDebtDateMoment = moment(initialDebtDateParsed, "MM-DD-YYYY");
+
+	    var rateDiff = latestDebtDateMoment.diff(initialDebtDateMoment, 'seconds');
+	    rateDiff = app.adjustForDST(rateDiff, latestDebtDateMoment, initialDebtDateMoment);
+
+	    var secRate = (latestDebt - initialDebt)/(rateDiff);
 	    
 	    console.log("requestURL: " + requestURL);
 	    console.log("latestDebt: " + latestDebt);
 	    console.log("latestDebtDate: " + latestDebtDate);
 	    console.log("initialDebt: " + initialDebt);
 	    console.log("entriesLength: " + entriesLength);
+	    console.log("rateDiff: " + rateDiff);
 	    console.log("secRate: " + secRate);
 	    console.log("requestStatus: " + request.status);
 	    
@@ -66,8 +75,10 @@ var App = function() {
     app.calculateAndShowDebt = function(latestDebt, latestDebtDate, secRate) {
 	var latestDebtDateParsed = app.parseDate(latestDebtDate);
 	var latestDebtDateMoment = moment(latestDebtDateParsed, "MM-DD-YYYY");
+	
 	var now = moment();
 	var diff = now.diff(latestDebtDateMoment, 'seconds');
+	diff = app.adjustForDST(diff, now);
 	
 	console.log("latestDebtDateMoment: " + latestDebtDateMoment.format("dddd, MMMM Do YYYY, h:mm:ss a"));
 	console.log("now: " + now.format("dddd, MMMM Do YYYY, h:mm:ss a"));
@@ -163,6 +174,27 @@ var App = function() {
 
 	return (monthNum + "-" + dayNum + "-" + yearNum);
     };
+
+    app.adjustForDST = function(value, moment1, moment2) {
+	var result = value;
+
+	if(moment1.isDST() || moment2.isDST()) {
+	    result -= 3600;
+	}
+
+	return result;
+    };
+
+    app.adjustForDST = function(value, moment) {
+	var result = value;
+
+	if(moment.isDST()) {
+	    result -= 3600;
+	}
+
+	return result;
+    }
+
 };
 
 var app = new App();
