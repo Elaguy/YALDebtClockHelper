@@ -55,7 +55,7 @@ var App = function() {
 	    var initialDebtDateParsed = app.parseDate(initialDebtDate);
 	    var initialDebtDateMoment = moment.tz(initialDebtDateParsed, "MM-DD-YYYY",
 	    					 "America/New_York");
-	    
+
 	    var rateDiff = latestDebtDateMoment.diff(initialDebtDateMoment, 'seconds');
 	    rateDiff = app.adjustForDST(rateDiff, initialDebtDateMoment, latestDebtDateMoment);
 	    
@@ -65,21 +65,18 @@ var App = function() {
 	    console.log("latestDebt: " + latestDebt);
 	    console.log("latestDebtDate: " + latestDebtDate);
 	    console.log("initialDebt: " + initialDebt);
+	    console.log("initialDebtDate: " + initialDebtDate);
 	    console.log("entriesLength: " + entriesLength);
 	    console.log("rateDiff: " + rateDiff);
 	    console.log("secRate: " + secRate);
 	    console.log("requestStatus: " + request.status);
 	    
-	    app.calculateAndShowDebt(latestDebt, latestDebtDate, secRate);
+	    app.calculateAndShowDebt(latestDebt, latestDebtDateMoment, secRate);
 	}
     };
     
-    app.calculateAndShowDebt = function(latestDebt, latestDebtDate, secRate) {
-	var latestDebtDateParsed = app.parseDate(latestDebtDate);
-	var latestDebtDateMoment = moment.tz(latestDebtDateParsed, "MM-DD-YYYY",
-					    "America/New_York");
-	
-	var now = moment();
+    app.calculateAndShowDebt = function(latestDebt, latestDebtDateMoment, secRate) {	
+	var now = moment().tz("America/New_York");
 	var diff = now.diff(latestDebtDateMoment, 'seconds');
   	diff = app.adjustForDST(diff, latestDebtDateMoment, now);
 	
