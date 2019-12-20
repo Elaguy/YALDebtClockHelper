@@ -47,17 +47,19 @@ var App = function() {
 	    var latestDebt = data["entries"][0]["totalDebt"];
 	    var latestDebtDate = data["entries"][0]["effectiveDate"];
 	    var latestDebtDateParsed = app.parseDate(latestDebtDate);
-	    var latestDebtDateMoment = moment(latestDebtDateParsed, "MM-DD-YYYY");
+	    var latestDebtDateMoment = moment.tz(latestDebtDateParsed, "MM-DD-YYYY",
+	    					"America/New_York");
 	    
 	    var initialDebt = data["entries"][entriesLength-1]["totalDebt"];
 	    var initialDebtDate = data["entries"][entriesLength-1]["effectiveDate"];
 	    var initialDebtDateParsed = app.parseDate(initialDebtDate);
-	    var initialDebtDateMoment = moment(initialDebtDateParsed, "MM-DD-YYYY");
-
+	    var initialDebtDateMoment = moment.tz(initialDebtDateParsed, "MM-DD-YYYY",
+	    					 "America/New_York");
+	    
 	    var rateDiff = latestDebtDateMoment.diff(initialDebtDateMoment, 'seconds');
-	    rateDiff = app.adjustForDST(rateDiff, latestDebtDateMoment, initialDebtDateMoment);
-
-	    var secRate = (latestDebt - initialDebt)/(rateDiff);
+	    rateDiff = app.adjustForDST(rateDiff, initialDebtDateMoment, latestDebtDateMoment);
+	    
+	    var secRate = (latestDebt - initialDebt) / (rateDiff);
 	    
 	    console.log("requestURL: " + requestURL);
 	    console.log("latestDebt: " + latestDebt);
@@ -74,11 +76,12 @@ var App = function() {
     
     app.calculateAndShowDebt = function(latestDebt, latestDebtDate, secRate) {
 	var latestDebtDateParsed = app.parseDate(latestDebtDate);
-	var latestDebtDateMoment = moment(latestDebtDateParsed, "MM-DD-YYYY");
+	var latestDebtDateMoment = moment.tz(latestDebtDateParsed, "MM-DD-YYYY",
+					    "America/New_York");
 	
 	var now = moment();
 	var diff = now.diff(latestDebtDateMoment, 'seconds');
-	diff = app.adjustForDST(diff, now);
+  	diff = app.adjustForDST(diff, latestDebtDateMoment, now);
 	
 	console.log("latestDebtDateMoment: " + latestDebtDateMoment.format("dddd, MMMM Do YYYY, h:mm:ss a"));
 	console.log("now: " + now.format("dddd, MMMM Do YYYY, h:mm:ss a"));
@@ -175,25 +178,19 @@ var App = function() {
 	return (monthNum + "-" + dayNum + "-" + yearNum);
     };
 
-    app.adjustForDST = function(value, moment1, moment2) {
+    app.adjustForDST = function(value, initialMoment, laterMoment) {
 	var result = value;
-
-	if(moment1.isDST() || moment2.isDST()) {
+	
+	if(initialMoment.isDST() && !laterMoment.isDST()) {
 	    result -= 3600;
+	}
+	
+	if(!initialMoment.isDST() && laterMoment.isDST()) {
+	    result += 3600;
 	}
 
 	return result;
     };
-
-    app.adjustForDST = function(value, moment) {
-	var result = value;
-
-	if(moment.isDST()) {
-	    result -= 3600;
-	}
-
-	return result;
-    }
 
 };
 
