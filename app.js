@@ -99,8 +99,8 @@ var App = function() {
     };
     
     app.getStartDate = function(currentDate) {
-	if(((currentDate.getMonth()+1) <= 9 && currentDate.getDate() <= 30) ||
-	   (currentDate.getMonth()+1) == 10 && currentDate.getDate() == 1) {
+	if(((currentDate.getMonth()+1) <= 9 && (currentDate.getDate() <= 31)) ||
+	   ((currentDate.getMonth()+1) == 10 && currentDate.getDate() == 1)) {
 	    return (currentDate.getFullYear()-1) + "-" + "10" + "-" + "1";
 	}
 	
